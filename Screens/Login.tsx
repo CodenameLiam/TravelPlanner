@@ -25,6 +25,10 @@ export default function Login(props: ILoginProps) {
 
 	const passwordRef: RefObject<any> = useRef(null);
 
+	const handleLogin = () => {
+		login(email, password, handleSuccess, handleError);
+	};
+
 	const handleError = (e: any) => {
 		console.log(e);
 	};
@@ -35,7 +39,6 @@ export default function Login(props: ILoginProps) {
 
 	return (
 		<AuthBackground>
-			{/* <View> */}
 			<TextInput
 				placeholder='Email'
 				autoCorrect={false}
@@ -48,7 +51,6 @@ export default function Login(props: ILoginProps) {
 				}}
 				blurOnSubmit={false}
 			/>
-
 			<TextInput
 				placeholder='Password'
 				autoCompleteType='off'
@@ -59,7 +61,7 @@ export default function Login(props: ILoginProps) {
 				value={password}
 				onChangeText={(text) => setPassword(text)}
 			/>
-			{/* </View> */}
+			<Button title='Login' onPress={handleLogin} />
 		</AuthBackground>
 	);
 }

@@ -14,6 +14,7 @@ export type AuthStackParamList = {
 	Login: undefined;
 	Register: undefined;
 	Forgot: undefined;
+	Home: undefined;
 };
 
 export type LoginNavProps = StackNavigationProp<AuthStackParamList, "Login">;
