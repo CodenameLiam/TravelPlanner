@@ -13,6 +13,8 @@ export default function Register(props: IRegisterProps) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
+	const [showPassword, setShowPassword] = useState(false);
+
 	const handleNameChange = (text: string) => {
 		setName(text);
 	};
@@ -25,7 +27,7 @@ export default function Register(props: IRegisterProps) {
 	const passwordRef: RefObject<any> = useRef(null);
 
 	return (
-		<ScrollView scrollEnabled={false} contentContainerStyle={styles.container}>
+		<ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
 			<KeyboardAvoidingView
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 				style={styles.inner}>
@@ -43,34 +45,45 @@ export default function Register(props: IRegisterProps) {
 				<TextInput
 					placeholder='Name'
 					// autoCorrect={false}
+					autoCompleteType='name'
 					returnKeyType='next'
 					style={styles.input}
 					value={name}
 					onChangeText={handleNameChange}
-					// blurOnSubmit={false}
-					onSubmitEditing={() => emailRef.current.focus()}
+					blurOnSubmit={false}
+					onSubmitEditing={() => {
+						emailRef.current.focus();
+					}}
 				/>
 				<TextInput
-					textContentType='none'
 					autoCompleteType='off'
+					keyboardType='email-address'
 					placeholder='Email'
 					returnKeyType='next'
+					autoCorrect={false}
 					ref={emailRef}
 					style={styles.input}
 					value={email}
 					onChangeText={handleEmailChange}
-					// blurOnSubmit={false}
-					onSubmitEditing={() => passwordRef.current.focus()}
+					blurOnSubmit={false}
+					onSubmitEditing={() => {
+						passwordRef.current.focus();
+					}}
 				/>
 				<TextInput
-					textContentType='none'
 					placeholder='Password'
 					autoCompleteType='off'
-					secureTextEntry={true}
+					// autoCorrect={false}
+					secureTextEntry={showPassword}
 					ref={passwordRef}
 					style={styles.input}
 					value={password}
 					onChangeText={(text) => setPassword(text)}
+				/>
+				<Button
+					title='Show the password'
+					color='#fff'
+					onPress={() => setShowPassword(!showPassword)}
 				/>
 				<Button
 					title='Already have an account?'

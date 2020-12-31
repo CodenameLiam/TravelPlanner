@@ -9,18 +9,21 @@ import {
 	KeyboardAvoidingView,
 	Platform,
 } from "react-native";
+import AuthBackground from "../Components/AuthBackground";
 import { LoginNavProps } from "../Constants/RouteParams";
 import { login } from "../Services/LoginService";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface ILoginProps {
 	navigation: LoginNavProps;
 }
 
 export default function Login(props: ILoginProps) {
-	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
-	const emailRef: RefObject<any> = useRef(null);
+	const passwordRef: RefObject<any> = useRef(null);
 
 	const handleError = (e: any) => {
 		console.log(e);
@@ -31,45 +34,33 @@ export default function Login(props: ILoginProps) {
 	};
 
 	return (
-		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
-			style={styles.container}>
-			<View>
-				<Text>Login</Text>
-			</View>
-			<View>
-				<TextInput
-					placeholder='Name'
-					// autoCorrect={false}
-					returnKeyType='next'
-					style={styles.input}
-					value={name}
-					onChangeText={(text) => setName(text)}
-					// blurOnSubmit={false}
-					onSubmitEditing={() => emailRef.current.focus()}
-				/>
-			</View>
-			<View>
-				<TextInput
-					placeholder='Email'
-					autoCorrect={false}
-					returnKeyType='next'
-					ref={emailRef}
-					style={styles.input}
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-					// blurOnSubmit={false}
-					// onSubmitEditing={() => passwordRef.current.focus()}
-				/>
-			</View>
-			<Button
-				title='Login'
-				onPress={() =>
-					login("liampercy123@gmail.com", "GoogleBUDDY123!", handleSuccess, handleError)
-				}
+		<AuthBackground>
+			{/* <View> */}
+			<TextInput
+				placeholder='Email'
+				autoCorrect={false}
+				returnKeyType='next'
+				style={styles.input}
+				value={email}
+				onChangeText={(text) => setEmail(text)}
+				onSubmitEditing={() => {
+					passwordRef.current.focus();
+				}}
+				blurOnSubmit={false}
 			/>
-			<Button title='Forgot password?' onPress={() => props.navigation.navigate("Forgot")} />
-		</KeyboardAvoidingView>
+
+			<TextInput
+				placeholder='Password'
+				autoCompleteType='off'
+				autoCorrect={false}
+				secureTextEntry={true}
+				ref={passwordRef}
+				style={styles.input}
+				value={password}
+				onChangeText={(text) => setPassword(text)}
+			/>
+			{/* </View> */}
+		</AuthBackground>
 	);
 }
 
