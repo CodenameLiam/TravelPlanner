@@ -5,7 +5,7 @@ import { AuthStackParamList } from "../Constants/RouteParams";
 import Forgot from "../Screens/Forgot";
 import Login from "../Screens/Login";
 import Register from "../Screens/Register";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator<AuthStackParamList>();
 

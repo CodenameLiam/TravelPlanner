@@ -12,6 +12,8 @@ import Register from "./Screens/Register";
 import Forgot from "./Screens/Forgot";
 import { RootStackParamList } from "./Constants/RouteParams";
 import AuthNavigation from "./Navigation/AuthNavigation";
+import AppNavigation from "./Navigation/AppNavigation";
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -32,7 +34,7 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				{user ? (
-					<Stack.Screen name='Home' component={Home} />
+					<Stack.Screen name='App' component={AppNavigation} />
 				) : (
 					<Stack.Screen name='Auth' component={AuthNavigation} />
 				)}

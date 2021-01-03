@@ -10,6 +10,12 @@ export type RootStackParamList = {
 	Forgot: undefined;
 };
 
+export type AppStackParamList = {
+	Home: undefined;
+	Add: undefined;
+	Profile: undefined;
+}
+
 export type AuthStackParamList = {
 	Login: undefined;
 	Register: undefined;
